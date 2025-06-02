@@ -1,0 +1,17 @@
+# Terraform local state
+*.tfstate
+*.tfstate.*
+crash.log
+.terraform/
+.terraform.lock.hcl
+
+# Variables that may contain secrets (if used)
+terraform.tfvars
+*.tfvars
+
+# CLI configuration file (credentials, etc.)
+.terraformrc
+terraform.rc
+
+# Ignore plan output
+*.tfplan
