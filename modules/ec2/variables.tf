@@ -1,20 +1,19 @@
 variable "vm_name" {
- type = string 
+  type = string
 }
 
 variable "sg_name" {
-    type = string
-  
+  type = string
+
 }
 
 variable "vm_type" {
-    type = string
-    default = "t2.micro"
+  type    = string
+  default = "t2.micro"
 }
 
 variable "ami_image" {
-    type = string
-    default = "ami-0ef32de3e8ab0640e"
+  type    = string
 }
 
 variable "vpc_id_for_vm" {

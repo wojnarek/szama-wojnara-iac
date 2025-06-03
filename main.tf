@@ -24,11 +24,23 @@ module "network" {
 }
 
 module "vm_instaces" {
-  source = "./modules/ec2"
-  sg_name = "app-sg"
-  public_subnet = [module.network.vm_public_subnets_ids[0]]
+  source         = "./modules/ec2"
+  sg_name        = "app-sg"
+  public_subnet  = [module.network.vm_public_subnets_ids[0]]
   private_subnet = [module.network.vm_priavte_subnets_ids[0]]
-  vm_name = "app-vm"
-  vpc_id_for_vm = module.network.vpc_id
+  vm_name        = "app-vm"
+  vpc_id_for_vm  = module.network.vpc_id
+  ami_image = "ami-0087a01c216f83e35"
+
+}
+
+module "alb" {
+  source               = "./modules/alb"
+  vpc_for_alb_id       = module.network.vpc_id
+  backend_port         = 8081
+  frontend_port        = 80
+  public_subnets_ids   = module.network.vm_public_subnets_ids
+  backend_instance_id  = module.vm_instaces.backend_vm_id_for_alb
+  frontend_instance_id = module.vm_instaces.frontend_vm_id_for_alb
 
 }
