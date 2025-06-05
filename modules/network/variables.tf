@@ -24,3 +24,12 @@ variable "destination_for_public_route" {
   type = string
 
 }
+
+variable "private_subnet_ids" {
+  type = list(string)
+  
+}
+
+variable "backend_sg_ids" {
+ type = string 
+}

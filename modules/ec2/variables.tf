@@ -27,3 +27,8 @@ variable "public_subnet" {
 variable "private_subnet" {
   type = list(string)
 }
+
+variable "instance_profile_ec2_ecr" {
+  type = string
+  
+}

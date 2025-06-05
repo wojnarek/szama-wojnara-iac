@@ -20,6 +20,8 @@ module "network" {
   public_subnet_cidrs          = ["10.0.1.0/24", "10.0.2.0/24"]
   private_subnet_cidrs         = ["10.0.3.0/24", "10.0.4.0/24"]
   destination_for_public_route = "0.0.0.0/0"
+  private_subnet_ids = module.network.vm_priavte_subnets_ids
+  backend_sg_ids = module.vm_instaces.backend_sg_ids
 
 }
 
@@ -31,6 +33,7 @@ module "vm_instaces" {
   vm_name        = "app-vm"
   vpc_id_for_vm  = module.network.vpc_id
   ami_image = "ami-0087a01c216f83e35"
+  instance_profile_ec2_ecr = module.roles.ec2_ecr_profile
 
 }
 
@@ -43,4 +46,13 @@ module "alb" {
   backend_instance_id  = module.vm_instaces.backend_vm_id_for_alb
   frontend_instance_id = module.vm_instaces.frontend_vm_id_for_alb
 
+}
+
+module "ecr" {
+  source = "./modules/ecr"  
+}
+
+module "roles" {
+  source = "./modules/roles"
+  
 }
