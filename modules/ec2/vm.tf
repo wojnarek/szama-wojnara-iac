@@ -81,7 +81,7 @@ resource "aws_instance" "vm_backend" {
   ami                    = var.ami_image
   instance_type          = var.vm_type
   subnet_id              = var.private_subnet[0]
-  vpc_security_group_ids = [aws_security_group.sg_backend.id]
+  vpc_security_group_ids = [aws_security_group.sg_frontend.id]
   iam_instance_profile = var.instance_profile_ec2_ecr
   key_name               = "my-keypair"
   tags = {
